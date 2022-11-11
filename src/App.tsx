@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Button} from "./components/Button";
 
-   //11
 // Hi guys! Let`s reinforce our session:
 
 // 1. Install AXIOS -it`s a library for HTTP requests. We  use it instead method FETCH.
@@ -64,7 +63,7 @@ function App() {
                         return (
                             <li key={el.id}>
                                 <span>{`${el.id} `}</span>
-                                <input type={"checkbox"} checked={el.completed}/>
+                                <input type={"checkbox"} checked={el.completed} onChange={()=>{}}/>
                                 <span>{` ${el.title}`}</span>
                             </li>
                         )
