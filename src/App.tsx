@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Button} from "./components/Button";
+import axios from "axios";
 
 // Hi guys! Let`s reinforce our session:
 
@@ -41,34 +42,36 @@ type dataType = {
 function App() {
     const [data, setData] = useState<dataType[]>([])
     const [title, setTitle] = useState<string>("Give data")
+
+    const mapData=data.map((el)=> {
+        return (
+            <li key={el.id}>
+                <span>{`${el.id} `}</span>
+                <input type={"checkbox"} checked={el.completed} onChange={() => {
+                }}/>
+                <span>{` ${el.title}`}</span>
+            </li>
+        )
+    })
+
     const clickButton = () => {
         if (data.length === 0) {
             setTitle("Clean data")
-            fetch('https://jsonplaceholder.typicode.com/todos')
-                .then(response => response.json())
-                .then(json => setData(json))
+            axios.get('https://jsonplaceholder.typicode.com/todos')
+                .then((res) => {
+                    setData(res.data)
+                })
         } else {
             setTitle("Give data")
             setData([])
         }
-
     }
 
     return (
         <div className="App">
             <Button name={title} callback={clickButton}/>
             <ul>
-                {
-                    data.map((el, index) => {
-                        return (
-                            <li key={el.id}>
-                                <span>{`${el.id} `}</span>
-                                <input type={"checkbox"} checked={el.completed} onChange={()=>{}}/>
-                                <span>{` ${el.title}`}</span>
-                            </li>
-                        )
-                    })
-                }
+                {mapData}
             </ul>
         </div>
     );
