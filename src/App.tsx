@@ -41,7 +41,7 @@ type dataType = {
 
 function App() {
     const [data, setData] = useState<dataType[]>([])
-    const [title, setTitle] = useState<string>("Give data")
+    const [title, setTitle] = useState<string>("НАЖМИ")
 
     const mapData=data.map((el)=> {
         return (
@@ -56,13 +56,13 @@ function App() {
 
     const clickButton = () => {
         if (data.length === 0) {
-            setTitle("Clean data")
+            setTitle("СТЕРЕТЬ")
             axios.get('https://jsonplaceholder.typicode.com/todos')
                 .then((res) => {
                     setData(res.data)
                 })
         } else {
-            setTitle("Give data")
+            setTitle("НАЖМИ")
             setData([])
         }
     }
